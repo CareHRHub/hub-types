@@ -1,0 +1,65 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Scheduling Application API"
+
+paths:
+  /employees:
+    post:
+      summary: "Create a new employee"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Employee object to be added"
+          required: true
+          schema:
+            $ref: "#/definitions/Employee"
+      responses:
+        "201":
+          description: "Employee created"
+
+  /shifts:
+    get:
+      summary: "Get all shifts"
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Shift"
+
+definitions:
+  Employee:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      firstname:
+        type: "string"
+      lastname:
+        type: "string"
+      dateOfBirth:
+        type: "string"
+      isActive:
+        type: "boolean"
+
+  Shift:
+    type: "object"
+    properties:
+      role:
+        $ref: "#/definitions/ShiftRole"
+      startDateTime:
+        type: "string"
+        format: "date-time"
+      endDateTime:
+        type: "string"
+        format: "date-time"
+
+  ShiftRole:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      id:
+        type: "string"
